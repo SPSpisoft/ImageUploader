@@ -119,8 +119,6 @@ public class imageUploader extends RelativeLayout {
             MTitle = typedArray.getString(R.styleable.imageUploader_Title);
 
             MSubTitle = typedArray.getString(R.styleable.imageUploader_SubTitle);
-//            MTypeFace = typedArray.geT(R.styleable.imageUploader_android_typeface);
-//            MTxtSize = typedArray.getDimensionPixelSize(R.styleable.imageUploader_TitleSize, 10);
             vSubTitle.setTextColor(typedArray.getColor(R.styleable.imageUploader_SubTitleColor, Color.GRAY));
             MShowTitleTrip = typedArray.getBoolean(R.styleable.imageUploader_ShowTitleTrip, false);
 
