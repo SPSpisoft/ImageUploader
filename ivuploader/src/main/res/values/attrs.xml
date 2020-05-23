@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="imageUploader">
+        <attr name="Title" format="string"/>
+        <attr name="ShowTitleTrip" format="boolean"/>
+        <attr name="SubTitle" format="string"/>
+        <attr name="SubTitleColor" format="color"/>
+        <attr name="CornerRadius" format="dimension"/>
+        <attr name="StrokeWidth" format="integer"/>
+        <attr name="StrokeColor" format="color"/>
+        <attr name="TitleSize" format="dimension"/>
+        <attr name="TitleTripSize" format="dimension"/>
+<!--        <attr name="BorderColor" format="color"/>-->
+
+<!--        <attr name="StartMode" format="enum">-->
+<!--        <enum name="Typing" value="0"/>-->
+<!--        <enum name="Voice" value="1"/>-->
+<!--        </attr>-->
+
+        <attr name="android:typeface"/>
+        <attr name="android:textSize"/>
+        <attr name="android:textColor"/>
+    </declare-styleable>
+</resources>
