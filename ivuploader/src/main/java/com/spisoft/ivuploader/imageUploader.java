@@ -134,7 +134,6 @@ public class imageUploader extends RelativeLayout {
 
         vTitle.setText(MTitle);
         vTitleTrip.setText(MTitle);
-//        vTitle.setTextSize(MTxtSize);
         if(MSubTitle != null) vSubTitle.setText(MSubTitle);
         vTitle.setTextColor(MTextColor);
         vTitleTrip.setTextAppearance(context, R.style.TextStyleShadow_1);
