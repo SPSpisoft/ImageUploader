@@ -16,10 +16,12 @@ public class MainActivity extends AppCompatActivity {
 
         final Typeface TF_Tahoma = Typeface.createFromAsset(MainActivity.this.getAssets(), "BTitr.ttf" + "");
 
+        imageUploader IV0 = findViewById(R.id.iv0);
         imageUploader IV = findViewById(R.id.iv);
         imageUploader IV2 = findViewById(R.id.iv2);
         String MySever = "http://199.166.1.111/DgStore/api/";
         String storeCode = "CMASIH2";
+        IV0.url(MySever).requestCode(new imageUploader.RequestMap(1,"StoreLogo")).where("UID = '"+storeCode+"'");
         IV.url(MySever).requestCode(new imageUploader.RequestMap(1,"StoreLogo")).where("UID = '"+storeCode+"'");
         IV2.url(MySever).title("test0000").extension(".PNG")
                 .requestCode(new imageUploader.RequestMap(2,"StoreBanner"))

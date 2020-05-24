@@ -12,13 +12,15 @@
         <attr name="BoxBackColor" format="color"/>
         <attr name="TitleSize" format="dimension"/>
         <attr name="TitleTopSize" format="dimension"/>
+        <attr name="ImageMargin" format="dimension"/>
 <!--        <attr name="BorderColor" format="color"/>-->
 
-<!--        <attr name="StartMode" format="enum">-->
-<!--        <enum name="Typing" value="0"/>-->
-<!--        <enum name="Voice" value="1"/>-->
-<!--        </attr>-->
+        <attr name="ScaleMode" format="enum">
+        <enum name="Default" value="0"/>
+        <enum name="Stretch" value="1"/>
+        </attr>
 
+        <attr name="android:scaleType"/>
         <attr name="android:typeface"/>
         <attr name="android:textSize"/>
         <attr name="android:textColor"/>

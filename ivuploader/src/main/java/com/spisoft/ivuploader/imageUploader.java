@@ -65,6 +65,7 @@ public class imageUploader extends RelativeLayout {
     private int MTxtSize;
     private boolean MShowTitleTrip = false;
     private Typeface mTypeface = null;
+    private int MScaleMode = 0;
 
     public imageUploader(Context context) {
         super(context);
@@ -131,8 +132,24 @@ public class imageUploader extends RelativeLayout {
             vTitle.setTextSize(typedArray.getDimensionPixelSize(R.styleable.imageUploader_TitleSize, 14));
             vTitleTrip.setTextSize(typedArray.getDimensionPixelSize(R.styleable.imageUploader_TitleTopSize, 14));
 
+            MScaleMode = typedArray.getInt(R.styleable.imageUploader_ScaleMode, 0);
+            switch (MScaleMode){
+                case 0:
+                    vImageView.setScaleType(ImageView.ScaleType.CENTER);
+                    break;
+                case 1:
+                    vImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    break;
+            }
+
+            int margin = typedArray.getDimensionPixelSize(R.styleable.imageUploader_ImageMargin , 0);
+            LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            params.setMargins(margin, margin, margin, margin);
+            vImageView.setLayoutParams(params);
+
             typedArray.recycle();
         }
+
 
         vTitle.setText(MTitle);
         vTitleTrip.setText(MTitle);
@@ -242,6 +259,10 @@ public class imageUploader extends RelativeLayout {
 
             @Override
             public void onFailure(RetrofitError error) {
+                vImageView.setImageBitmap(null);
+                vTitle.setVisibility(VISIBLE);
+                vSubTitle.setVisibility(VISIBLE);
+
                 vProgress.setVisibility(GONE);
                 Toast.makeText(context,"Upload failed",Toast.LENGTH_LONG).show();
 //                Log.e("Upload", error.getMessage().toString());
