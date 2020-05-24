@@ -2,6 +2,7 @@
 <resources>
 
     <declare-styleable name="imageUploader">
+        <attr name="Preview" format="string"/>
         <attr name="Title" format="string"/>
         <attr name="ShowTitleTop" format="boolean"/>
         <attr name="SubTitle" format="string"/>

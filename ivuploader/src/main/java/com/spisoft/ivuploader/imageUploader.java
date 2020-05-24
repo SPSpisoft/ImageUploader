@@ -6,8 +6,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.LayoutDirection;
@@ -38,6 +40,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -66,6 +69,8 @@ public class imageUploader extends RelativeLayout {
     private boolean MShowTitleTrip = false;
     private Typeface mTypeface = null;
     private int MScaleMode = 0;
+    private Context MyContext;
+    private String MPreview;
 
     public imageUploader(Context context) {
         super(context);
@@ -88,6 +93,8 @@ public class imageUploader extends RelativeLayout {
     }
 
     private void init(final Context context, AttributeSet attrs) {
+
+        MyContext = context;
 
         rootView = inflate(context, R.layout.iu_view, this);
 
@@ -119,6 +126,8 @@ public class imageUploader extends RelativeLayout {
 
             MTextColor = typedArray.getColor(R.styleable.imageUploader_android_textColor, Color.GRAY);
             MTitle = typedArray.getString(R.styleable.imageUploader_Title);
+
+            MPreview = typedArray.getString(R.styleable.imageUploader_Preview);
 
             MSubTitle = typedArray.getString(R.styleable.imageUploader_SubTitle);
             vSubTitle.setTextColor(typedArray.getColor(R.styleable.imageUploader_SubTitleColor, Color.GRAY));
@@ -160,6 +169,22 @@ public class imageUploader extends RelativeLayout {
             vTitle.setTypeface(mTypeface);
             vTitleTrip.setTypeface(mTypeface);
         }
+
+
+        Picasso.with(context).load(MPreview).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                vImageView.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            }
+        });
     }
 
     private void IntentImage(int mResultRequest) {
@@ -275,6 +300,25 @@ public class imageUploader extends RelativeLayout {
 
     public imageUploader url(String myUrl){
         this.mUrl = myUrl;
+        return this;
+    }
+
+    public imageUploader preview(Context context, String url){
+        this.MPreview = url;
+        Picasso.with(context).load(MPreview).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                vImageView.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            }
+        });
         return this;
     }
 
