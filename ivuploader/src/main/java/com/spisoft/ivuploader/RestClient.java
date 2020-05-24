@@ -10,7 +10,7 @@ import retrofit.converter.GsonConverter;
 public class RestClient {
     private UploadService uploadService;
 //    private String URL = MyUrlFiles+"api/";
-    private int myCode = 0;
+    private String myCode = "";
     private String myName = "";
     private String myWhere = "";
 
@@ -27,7 +27,7 @@ public class RestClient {
                         if (myUrl.contains("199.166.1.111")) {
                             requestFacade.addHeader("Host", "localhost");
                         }
-                        requestFacade.addQueryParam("mCode", String.valueOf(myCode));
+                        requestFacade.addQueryParam("mCode", myCode);
                         requestFacade.addQueryParam("mName", myName);
                         requestFacade.addQueryParam("mWhere", myWhere);
                     }
@@ -35,7 +35,7 @@ public class RestClient {
                 .build().create(UploadService.class));
     }
 
-    public UploadService getService(String mName, int mCode, String mWhere)
+    public UploadService getService(String mName, String mCode, String mWhere)
     {
         if(mName != null) this.myName = mName;
         this.myCode = mCode;

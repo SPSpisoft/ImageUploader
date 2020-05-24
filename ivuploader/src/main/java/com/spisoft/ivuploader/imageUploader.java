@@ -45,6 +45,7 @@ import java.util.Collection;
 import java.util.List;
 
 import retrofit.RetrofitError;
+import retrofit.client.Request;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
 
@@ -58,7 +59,7 @@ public class imageUploader extends RelativeLayout {
     private String mUrl = null;
     private String mTitle = null;
     private String mExtension = null;
-    private int mResultRequest = 0;
+    private RequestMap mResultRequest = null;
     private int MTextColor;
     private String MTitle, MSubTitle = null;
     private int MTxtSize;
@@ -105,7 +106,7 @@ public class imageUploader extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if(GetPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    IntentImage(mResultRequest);
+                    IntentImage(mResultRequest.getrCode());
                 }else
                     Toast.makeText(context ,"STORAGE ACCESS DENIED !" ,Toast.LENGTH_SHORT).show();
             }
@@ -120,14 +121,15 @@ public class imageUploader extends RelativeLayout {
 
             MSubTitle = typedArray.getString(R.styleable.imageUploader_SubTitle);
             vSubTitle.setTextColor(typedArray.getColor(R.styleable.imageUploader_SubTitleColor, Color.GRAY));
-            MShowTitleTrip = typedArray.getBoolean(R.styleable.imageUploader_ShowTitleTrip, false);
+            MShowTitleTrip = typedArray.getBoolean(R.styleable.imageUploader_ShowTitleTop, false);
 
             vCardBorder.setRadius(typedArray.getDimension(R.styleable.imageUploader_CornerRadius, 6));
             vCardBorder.setStrokeColor(typedArray.getColor(R.styleable.imageUploader_StrokeColor, Color.GRAY));
+            vCardBorder.setBackgroundColor(typedArray.getColor(R.styleable.imageUploader_BoxBackColor, Color.WHITE));
             vCardBorder.setStrokeWidth(typedArray.getInt(R.styleable.imageUploader_StrokeWidth, 2));
 
             vTitle.setTextSize(typedArray.getDimensionPixelSize(R.styleable.imageUploader_TitleSize, 14));
-            vTitleTrip.setTextSize(typedArray.getDimensionPixelSize(R.styleable.imageUploader_TitleTripSize, 14));
+            vTitleTrip.setTextSize(typedArray.getDimensionPixelSize(R.styleable.imageUploader_TitleTopSize, 14));
 
             typedArray.recycle();
         }
@@ -204,7 +206,7 @@ public class imageUploader extends RelativeLayout {
         if(mTitle != null) fileName = mTitle+extension;
 
         RestClient restClient = new RestClient(mUrl);
-        restClient.getService(fileName, requestCode, mWhere).upload(typedFile, new CancelableCallback<Response>() {
+        restClient.getService(fileName, mResultRequest.getrRequest(), mWhere).upload(typedFile, new CancelableCallback<Response>() {
             @Override
             public void onSuccess(Response response, Response response2) {
                 vProgress.setVisibility(GONE);
@@ -227,8 +229,12 @@ public class imageUploader extends RelativeLayout {
 //                                Toast.makeText(context,"fail",Toast.LENGTH_LONG).show();
                             }
                         });
-                if(response.getStatus() == 202) vCheck1.setVisibility(VISIBLE);
-                if(response.getStatus() == 200) vCheck2.setVisibility(VISIBLE);
+                if(response.getStatus() == 202)
+                    vCheck1.setVisibility(VISIBLE);
+                if(response.getStatus() == 200) {
+                    vCheck1.setVisibility(VISIBLE);
+                    vCheck2.setVisibility(VISIBLE);
+                }
 
 //                Toast.makeText(context,"Upload successfully",Toast.LENGTH_LONG).show();
                 Log.e("Upload", "success");
@@ -261,7 +267,7 @@ public class imageUploader extends RelativeLayout {
         return this;
     }
 
-    public imageUploader requestCode(int myCode){
+    public imageUploader requestCode(RequestMap myCode){
         this.mResultRequest = myCode;
         return this;
     }
@@ -365,5 +371,31 @@ public class imageUploader extends RelativeLayout {
             }
 
         }).check();
+    }
+
+    public static class RequestMap {
+        private int rCode;
+        private String rRequest;
+
+        public RequestMap(int code, String request){
+            this.rCode = code;
+            this.rRequest = request;
+        }
+
+        public int getrCode() {
+            return rCode;
+        }
+
+        public void setrCode(int rCode) {
+            this.rCode = rCode;
+        }
+
+        public String getrRequest() {
+            return rRequest;
+        }
+
+        public void setrRequest(String rRequest) {
+            this.rRequest = rRequest;
+        }
     }
 }

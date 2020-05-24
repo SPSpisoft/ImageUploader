@@ -19,7 +19,10 @@ public class MainActivity extends AppCompatActivity {
         imageUploader IV = findViewById(R.id.iv);
         imageUploader IV2 = findViewById(R.id.iv2);
         String MySever = "http://199.166.1.111/DgStore/api/";
-        IV.url(MySever).requestCode(1);
-        IV2.url(MySever).title("test0000").extension(".PNG").requestCode(2).titleTypeFace(TF_Tahoma);
+        String storeCode = "CMASIH2";
+        IV.url(MySever).requestCode(new imageUploader.RequestMap(1,"StoreLogo")).where("UID = '"+storeCode+"'");
+        IV2.url(MySever).title("test0000").extension(".PNG")
+                .requestCode(new imageUploader.RequestMap(2,"StoreBanner"))
+                .where("UID = '"+storeCode+"'").titleTypeFace(TF_Tahoma);
     }
 }

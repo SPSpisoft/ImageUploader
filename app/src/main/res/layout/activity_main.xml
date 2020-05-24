@@ -10,7 +10,7 @@
         android:id="@+id/iv"
         app:Title="gggggg"
         app:SubTitle="@string/app_name"
-        app:ShowTitleTrip="true"
+        app:ShowTitleTop="true"
         android:textColor="@android:color/holo_red_dark"
         android:layout_width="200dp"
         android:layout_height="200dp">
@@ -23,9 +23,9 @@
         app:StrokeColor="@android:color/holo_red_dark"
         app:StrokeWidth="5"
         app:Title="عکس"
-        app:ShowTitleTrip="true"
+        app:ShowTitleTop="true"
         app:TitleSize="16dp"
-        app:TitleTripSize="8dp"
+        app:TitleTopSize="8dp"
         android:layout_width="100dp"
         android:layout_height="200dp">
     </com.spisoft.ivuploader.imageUploader>

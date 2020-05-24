@@ -62,7 +62,7 @@ public class UploadSync extends AsyncTask<String, String, Boolean> {
             }
 
             TypedFile typedFile = new TypedFile("multipart/form-data", zipFile);
-            Response response = restClient.getService(null,0,null).uploadSync(typedFile);
+            Response response = restClient.getService(null,null,null).uploadSync(typedFile);
 
             if (response == null){
                 Log.e(TAG, "success send server - failed");
