@@ -133,10 +133,13 @@ public class imageUploader extends RelativeLayout {
             vSubTitle.setTextColor(typedArray.getColor(R.styleable.imageUploader_SubTitleColor, Color.GRAY));
             MShowTitleTrip = typedArray.getBoolean(R.styleable.imageUploader_ShowTitleTop, false);
 
-            vCardBorder.setRadius(typedArray.getDimension(R.styleable.imageUploader_CornerRadius, 6));
+            float radius = typedArray.getDimension(R.styleable.imageUploader_CornerRadius, 6);
+            vCardBorder.setRadius(radius);
             vCardBorder.setStrokeColor(typedArray.getColor(R.styleable.imageUploader_StrokeColor, Color.GRAY));
             vCardBorder.setBackgroundColor(typedArray.getColor(R.styleable.imageUploader_BoxBackColor, Color.WHITE));
             vCardBorder.setStrokeWidth(typedArray.getInt(R.styleable.imageUploader_StrokeWidth, 2));
+
+            vProgress.setPadding((int)radius,0,0,(int)radius);
 
             vTitle.setTextSize(typedArray.getDimensionPixelSize(R.styleable.imageUploader_TitleSize, 14));
             vTitleTrip.setTextSize(typedArray.getDimensionPixelSize(R.styleable.imageUploader_TitleTopSize, 14));
@@ -171,20 +174,40 @@ public class imageUploader extends RelativeLayout {
         }
 
 
-        Picasso.with(context).load(MPreview).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                vImageView.setImageBitmap(bitmap);
-            }
+        SetPreview(context);
+//        Picasso.with(context).load(MPreview).into(new Target() {
+//            @Override
+//            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//                vImageView.setImageBitmap(bitmap);
+//            }
+//
+//            @Override
+//            public void onBitmapFailed(Drawable errorDrawable) {
+//            }
+//
+//            @Override
+//            public void onPrepareLoad(Drawable placeHolderDrawable) {
+//            }
+//        });
+    }
 
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-            }
+    private void SetPreview(Context context) {
+        Picasso.with(context)
+                .load(MPreview)
+                .fit().centerInside()
+                .into(vImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        if(MShowTitleTrip) vTitleTrip.setVisibility(VISIBLE);
+                        vTitle.setVisibility(GONE);
+                        vSubTitle.setVisibility(GONE);
+                    }
 
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-            }
-        });
+                    @Override
+                    public void onError() {
+
+                    }
+                });
     }
 
     private void IntentImage(int mResultRequest) {
@@ -305,20 +328,26 @@ public class imageUploader extends RelativeLayout {
 
     public imageUploader preview(Context context, String url){
         this.MPreview = url;
-        Picasso.with(context).load(MPreview).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                vImageView.setImageBitmap(bitmap);
-            }
+        SetPreview(context);
+//        Picasso.with(context)
+//                .load(url)
+//                .fit().centerInside()
+//                .into(vImageView);
 
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-            }
-        });
+//        Picasso.with(context).load(MPreview).fit().into(new Target() {
+//            @Override
+//            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//                vImageView.setImageBitmap(bitmap);
+//            }
+//
+//            @Override
+//            public void onBitmapFailed(Drawable errorDrawable) {
+//            }
+//
+//            @Override
+//            public void onPrepareLoad(Drawable placeHolderDrawable) {
+//            }
+//        });
         return this;
     }
 
