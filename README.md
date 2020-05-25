@@ -1,5 +1,6 @@
 # ImageUploader
 A library for uploading images to the server.
+upload image to the server determined path & save path to the field on server DB 
 
 
   # How to Use;
