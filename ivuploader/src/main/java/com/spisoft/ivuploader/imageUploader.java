@@ -351,7 +351,7 @@ public class imageUploader extends RelativeLayout {
         return this;
     }
 
-    public imageUploader title(String myTitle){
+    public imageUploader fileName(String myTitle){
         this.mTitle = myTitle;
         return this;
     }
@@ -361,15 +361,16 @@ public class imageUploader extends RelativeLayout {
         return this;
     }
 
-    public imageUploader requestCode(RequestMap myCode){
+    public imageUploader requestCode(RequestMap myCode, String myWhere){
         this.mResultRequest = myCode;
-        return this;
-    }
-
-    public imageUploader where(String myWhere){
         this.mWhere = myWhere;
         return this;
     }
+
+//    public imageUploader where(String myWhere){
+//        this.mWhere = myWhere;
+//        return this;
+//    }
 
     public imageUploader titleTypeFace(Typeface myTypeface){
         this.mTypeface = myTypeface;
