@@ -17,10 +17,26 @@ upload image to the server determined path & save path to the field on server DB
 	  }
 
 # sample : 
+
+	xml:
+    <com.spisoft.ivuploader.imageUploader
+	android:id="@+id/iuLogo"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingStart="3dp"
+	android:paddingEnd="3dp"
+	app:CornerRadius="6dp"
+	app:StrokeColor="@android:color/darker_gray"
+	app:StrokeWidth="2"
+	app:SubTitle="@string/IuDescription"
+	app:Title="@string/logo" />
+		
+	Code:		
       imageUploader vIuLogo = (imageUploader) findViewById(R.id.iuLogo);
       vIuLogo.preview(MyStoreActivity.this, YOUR_PREVIEW_URL)
                 .fileName(YOUR_FILE_NAME) // if not used fileName func save&set base fie name into server.
                 .requestCode(new imageUploader.RequestMap(1, YOUR_REQUEST_ID), YOUR_CONDITION_TO_UPDATE_FIELD);
+
 
 
 # Sample server code [c# - web api];
