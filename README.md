@@ -3,6 +3,9 @@ A library for uploading images to the server.
 upload image to the server determined path & save path to the field on server DB 
 
 
+![A](https://user-images.githubusercontent.com/11540724/82868439-e57bae00-9f41-11ea-9600-b05ca5bc3a0f.gif)
+
+
   # How to Use;
       
     allprojects {
