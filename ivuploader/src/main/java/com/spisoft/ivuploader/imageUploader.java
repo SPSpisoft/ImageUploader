@@ -6,17 +6,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.LayoutDirection;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -24,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -40,7 +34,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+import com.tinify.Tinify;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,7 +42,6 @@ import java.util.Collection;
 import java.util.List;
 
 import retrofit.RetrofitError;
-import retrofit.client.Request;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
 
@@ -71,6 +64,8 @@ public class imageUploader extends RelativeLayout {
     private int MScaleMode = 0;
     private Context MyContext;
     private String MPreview;
+    private boolean mTiyPng = false;
+    private OnCallBack mCallBack;
 
     public imageUploader(Context context) {
         super(context);
@@ -235,7 +230,7 @@ public class imageUploader extends RelativeLayout {
                     else {
                         realPath = RealPathUtil.getRealPathFromURI_API19((FragmentActivity) getContext(), data.getData());
                     }
-
+                    vImageView.setImageDrawable(null);
                     uploadImage((FragmentActivity) getContext(), new File(realPath), requestCode);
 
                     System.out.println("Image Path : " + realPath);
@@ -300,7 +295,7 @@ public class imageUploader extends RelativeLayout {
                     vCheck1.setVisibility(VISIBLE);
                     vCheck2.setVisibility(VISIBLE);
                 }
-
+                if(mCallBack != null) mCallBack.onEvent(response.getStatus());
 //                Toast.makeText(context,"Upload successfully",Toast.LENGTH_LONG).show();
                 Log.e("Upload", "success");
             }
@@ -361,6 +356,12 @@ public class imageUploader extends RelativeLayout {
         return this;
     }
 
+    public imageUploader tinyPng(String apiKey){
+        Tinify.setKey(apiKey);
+        this.mTiyPng = true;
+        return this;
+    }
+
     public imageUploader requestCode(RequestMap myCode, String myWhere){
         this.mResultRequest = myCode;
         this.mWhere = myWhere;
@@ -377,6 +378,14 @@ public class imageUploader extends RelativeLayout {
         vTitle.setTypeface(mTypeface);
         vTitleTrip.setTypeface(mTypeface);
         return this;
+    }
+
+    public interface OnCallBack {
+        void onEvent(int status);
+    }
+
+    public void setOnCallBack(OnCallBack eventListener) {
+        mCallBack = eventListener;
     }
 
 //    public interface OnPlusClickListener {
