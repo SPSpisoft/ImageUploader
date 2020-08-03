@@ -266,6 +266,7 @@ public class imageUploader extends RelativeLayout {
         if(mTitle != null) fileName = mTitle+extension;
 
         RestClient restClient = new RestClient(mUrl);
+        final String finalFileName = fileName;
         restClient.getService(fileName, mResultRequest.getrRequest(), mWhere).upload(typedFile, new CancelableCallback<Response>() {
             @Override
             public void onSuccess(Response response, Response response2) {
@@ -295,7 +296,7 @@ public class imageUploader extends RelativeLayout {
                     vCheck1.setVisibility(VISIBLE);
                     vCheck2.setVisibility(VISIBLE);
                 }
-                if(mCallBack != null) mCallBack.onEvent(response.getStatus());
+                if(mCallBack != null) mCallBack.onEvent(response.getStatus(), finalFileName);
 //                Toast.makeText(context,"Upload successfully",Toast.LENGTH_LONG).show();
                 Log.e("Upload", "success");
             }
@@ -381,7 +382,7 @@ public class imageUploader extends RelativeLayout {
     }
 
     public interface OnCallBack {
-        void onEvent(int status);
+        void onEvent(int status, String finalFileName);
     }
 
     public void setOnCallBack(OnCallBack eventListener) {

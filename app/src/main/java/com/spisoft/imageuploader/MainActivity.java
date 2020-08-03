@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 .requestCode(new imageUploader.RequestMap(2,"StoreBanner"), "UID = '"+storeCode+"'").titleTypeFace(TF_Tahoma)
                 .setOnCallBack(new imageUploader.OnCallBack() {
                     @Override
-                    public void onEvent(int status) {
+                    public void onEvent(int status, String finalFileName) {
                         Toast.makeText(MainActivity.this, "aaaaaaa "+status, Toast.LENGTH_LONG).show();
                     }
                 });
