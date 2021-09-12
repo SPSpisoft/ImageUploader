@@ -19,13 +19,13 @@ public class MainActivity extends AppCompatActivity {
 
         final Typeface TF_Tahoma = Typeface.createFromAsset(MainActivity.this.getAssets(), "BTitr.ttf" + "");
 
-        imageUploader IV0 = findViewById(R.id.iv0);
+        final imageUploader IV0 = findViewById(R.id.iv0);
         imageUploader IV = findViewById(R.id.iv);
         imageUploader IV2 = findViewById(R.id.iv2);
-        String MySever = "http://199.166.1.111/DgStore/api/";
+        String MySever = "http://192.168.42.118/ChorderWS/api/";
 //        String MySever = "http://79.127.104.70:1025/ChorderWS/api/";
         String storeCode = "CMASIH2";
-        IV0.url(MySever).preview(MainActivity.this, "http://199.166.1.111/DgStore/_Files/Images/_Banner/ic_tools_logo.png")
+        IV0.url(MySever).preview(MainActivity.this, "http://192.168.42.118/chortkeImage/aaa.jpg")
                 .requestCode(new imageUploader.RequestMap(1,"StoreLogo"), "UID = '"+storeCode+"'");
         IV.url(MySever).requestCode(new imageUploader.RequestMap(2,"StoreLogo"),"UID = '"+storeCode+"'");
 //        IV.url(MySever).requestCode(null, null);
@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                IV0.OpenDialogGetImage(MainActivity.this);
                 String bb ="";
                 Toast.makeText(MainActivity.this, bb, Toast.LENGTH_SHORT).show();
             }

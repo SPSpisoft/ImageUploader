@@ -66,6 +66,7 @@ public class imageUploader extends RelativeLayout {
     private String MPreview;
     private boolean mTiyPng = false;
     private OnCallBack mCallBack;
+    private boolean isSetClickable = true;
 
     public imageUploader(Context context) {
         super(context);
@@ -105,22 +106,14 @@ public class imageUploader extends RelativeLayout {
         vTitleTrip = rootView.findViewById(R.id.txtTitleTrip);
         vSubTitle = rootView.findViewById(R.id.txtSubTitle);
 
-        vImageView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(GetPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    IntentImage(mResultRequest.getrCode());
-                }else
-                    Toast.makeText(context ,"STORAGE ACCESS DENIED !" ,Toast.LENGTH_SHORT).show();
-            }
-        });
-
 
         if (attrs != null) {
             final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.imageUploader, 0, 0);
 
             MTextColor = typedArray.getColor(R.styleable.imageUploader_android_textColor, Color.GRAY);
             MTitle = typedArray.getString(R.styleable.imageUploader_Title);
+
+            isSetClickable = typedArray.getBoolean(R.styleable.imageUploader_IsClickable, true);
 
             MPreview = typedArray.getString(R.styleable.imageUploader_Preview);
 
@@ -157,6 +150,14 @@ public class imageUploader extends RelativeLayout {
             typedArray.recycle();
         }
 
+        vImageView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isSetClickable)
+                    OpenDialogGetImage(context);
+            }
+        });
+
 
         vTitle.setText(MTitle);
         vTitleTrip.setText(MTitle);
@@ -184,6 +185,13 @@ public class imageUploader extends RelativeLayout {
 //            public void onPrepareLoad(Drawable placeHolderDrawable) {
 //            }
 //        });
+    }
+
+    public void OpenDialogGetImage(Context context) {
+        if(GetPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            IntentImage(mResultRequest.getrCode());
+        }else
+            Toast.makeText(context ,"STORAGE ACCESS DENIED !" ,Toast.LENGTH_SHORT).show();
     }
 
     private void SetPreview(Context context) {
@@ -381,6 +389,10 @@ public class imageUploader extends RelativeLayout {
         return this;
     }
 
+    public void setIsClickable(boolean setClickable) {
+        this.isSetClickable = setClickable;
+    }
+
     public interface OnCallBack {
         void onEvent(int status, String finalFileName);
     }
@@ -460,7 +472,7 @@ public class imageUploader extends RelativeLayout {
             }
 
             @Override
-            public void onPermissionRationaleShouldBeShown(List<com.karumi.dexter.listener.PermissionRequest> permissions, PermissionToken permissionToken) {
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken permissionToken) {
                 for(int i = 0; i < permissions.size(); i++){
 //                    if(permissions.get(i).getName().toUpperCase().contains("CAMERA"))
 //                        if(UseSpeechToText) {

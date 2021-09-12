@@ -24,7 +24,7 @@ public class RestClient {
                 {
                     public void intercept(RequestFacade requestFacade)
                     {   //By adding header to the request will allow us to debug into .Net code in server
-                        if (myUrl.contains("199.166.1.111")) {
+                        if (myUrl.contains("199.166.1.111") ) {
                             requestFacade.addHeader("Host", "localhost");
                         }
                         requestFacade.addQueryParam("mCode", myCode);

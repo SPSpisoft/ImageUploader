@@ -17,6 +17,7 @@
         android:layout_alignParentStart="true"
         app:Title=""
         app:SubTitle=""
+        app:IsClickable="false"
         app:StrokeWidth="0"
         android:textColor="@android:color/holo_red_dark"
         android:layout_margin="25dp"
