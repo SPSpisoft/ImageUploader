@@ -58,15 +58,15 @@ public class MainActivity extends AppCompatActivity {
 
 //        String MyServerAddress = "http://199.166.1.21:12036/";
         String MyServerAddress = "https://shop.spisoft.ir/";
-        String MyUserID = "USR_13nF8WkvbJ3UiMOE";
+        String MyUserID = "USR_13n";
         List<RestClient.RequestPara> mReqList = new ArrayList<>();
-        mReqList.add(new RestClient.RequestPara("MyToken", "1kNr5V6KAkeoRWtKeh4N0w=="));
+        mReqList.add(new RestClient.RequestPara("MyToken", "6KAkeoRWtKeh4N0w=="));
         mReqList.add(new RestClient.RequestPara("StoreCode", "MalekiStore"));
         mReqList.add(new RestClient.RequestPara("mName", MyUserID + ".PNG"));
         mReqList.add(new RestClient.RequestPara("mWhere", "UserID = '" + MyUserID + "'"));
         mReqList.add(new RestClient.RequestPara("mCode", "ProfileImage"));
         vImageUploader.url(MyServerAddress + "api/")
-                .tinyPng("JqtG53YHsfnMdkgJG5Kwgvtngz6SSdR5")
+                .tinyPng("YHsfnMdkgJG5Kwgvtngz6SSdR5")
                 .fileName(MyUserID)
                 .extension(".PNG")
                 .preview(MainActivity.this, MyServerAddress + "/_Files/Images/Profile/" + MyUserID + ".PNG")

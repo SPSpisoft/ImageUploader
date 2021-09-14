@@ -17,8 +17,8 @@ public class RestClient {
     private String myCode = "";
     private String myName = "";
     private String myWhere = "";
-    public final static String Authorization_User = "SPUSER_1" ;
-    public final static String Authorization_Pass = "SPPASS_123asdASD!@#";
+    public final static String Authorization_User = "SP" ;
+    public final static String Authorization_Pass = "SP";
 
     public RestClient(final String myUrl, final List<RequestPara> myListPara){
         Gson localGson = new GsonBuilder().create();
