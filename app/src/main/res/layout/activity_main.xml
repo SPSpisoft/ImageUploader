@@ -56,4 +56,18 @@
         android:layout_height="200dp">
     </com.spisoft.ivuploader.imageUploader>
 
+    <com.spisoft.ivuploader.imageUploader
+        android:id="@+id/imgUploader"
+        android:layout_width="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="150dp"
+        android:layout_below="@+id/iv"
+        android:layout_above="@+id/iv2"
+        android:textColor="@android:color/holo_red_dark"
+        app:CornerRadius="50dp"
+        app:IsClickable="true"
+        app:StrokeWidth="0"
+        app:SubTitle=""
+        app:Title=""/>
+
 </RelativeLayout>

@@ -26,7 +26,7 @@ public class UploadSync extends AsyncTask<String, String, Boolean> {
 
     public UploadSync(Activity activity, String url){
         this.activity = activity;
-        restClient = new RestClient(url);
+        restClient = new RestClient(url, null);
     }
 
     @Override

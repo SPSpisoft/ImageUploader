@@ -67,6 +67,7 @@ public class imageUploader extends RelativeLayout {
     private boolean mTiyPng = false;
     private OnCallBack mCallBack;
     private boolean isSetClickable = true;
+    private List<RestClient.RequestPara> mReqList = null;
 
     public imageUploader(Context context) {
         super(context);
@@ -273,7 +274,7 @@ public class imageUploader extends RelativeLayout {
         }
         if(mTitle != null) fileName = mTitle+extension;
 
-        RestClient restClient = new RestClient(mUrl);
+        RestClient restClient = new RestClient(mUrl, mReqList);
         final String finalFileName = fileName;
         restClient.getService(fileName, mResultRequest.getrRequest(), mWhere).upload(typedFile, new CancelableCallback<Response>() {
             @Override
@@ -374,6 +375,12 @@ public class imageUploader extends RelativeLayout {
     public imageUploader requestCode(RequestMap myCode, String myWhere){
         this.mResultRequest = myCode;
         this.mWhere = myWhere;
+        return this;
+    }
+
+    public imageUploader requestParameters(List<RestClient.RequestPara> requestParas){
+        this.mReqList = new ArrayList<>();
+        this.mReqList = requestParas;
         return this;
     }
 
