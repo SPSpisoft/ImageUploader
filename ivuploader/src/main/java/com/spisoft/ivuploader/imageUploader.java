@@ -19,11 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.card.MaterialCardView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -47,7 +47,7 @@ import retrofit.mime.TypedFile;
 
 public class imageUploader extends RelativeLayout {
     private View rootView;
-    private MaterialCardView vCardBorder;
+    private CardView vCardBorder;
     private ProgressBar vProgress;
     private ImageView vImageView, vCheck1, vCheck2;
     private TextView vTitle, vSubTitle, vTitleTrip;
@@ -124,9 +124,9 @@ public class imageUploader extends RelativeLayout {
 
             float radius = typedArray.getDimension(R.styleable.imageUploader_CornerRadius, 6);
             vCardBorder.setRadius(radius);
-            vCardBorder.setStrokeColor(typedArray.getColor(R.styleable.imageUploader_StrokeColor, Color.GRAY));
+            vCardBorder.setCardBackgroundColor(typedArray.getColor(R.styleable.imageUploader_StrokeColor, Color.GRAY));
             vCardBorder.setBackgroundColor(typedArray.getColor(R.styleable.imageUploader_BoxBackColor, Color.WHITE));
-            vCardBorder.setStrokeWidth(typedArray.getInt(R.styleable.imageUploader_StrokeWidth, 2));
+            vCardBorder.setMinimumWidth(typedArray.getInt(R.styleable.imageUploader_StrokeWidth, 2));
 
             vProgress.setPadding((int)radius,0,0,(int)radius);
 
